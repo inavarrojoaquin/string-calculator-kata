@@ -29,5 +29,13 @@ namespace StringCalculator
         {
             Assert.AreEqual(result, new Calculator().Add(input));
         }
+
+        [TestCase("1\n2", 3)]
+        [TestCase("1\n2,3", 6)]
+        public void AddNumbersWithNewlineSeparator(string input, int result)
+        {
+            Assert.AreEqual(result, new Calculator().Add(input));
+        }
+        
     }
 }

@@ -17,7 +17,8 @@ namespace StringCalculator
             if (string.IsNullOrEmpty(numbers))
                 return result;
 
-            foreach(string number in numbers.Split(',')) 
+            char[] separators = { ',', '\n' };
+            foreach (string number in numbers.Split(separators)) 
                 result += int.Parse(number);
             
             return result;
