@@ -24,6 +24,7 @@ namespace StringCalculator
         [TestCase("1,2", 3)]
         [TestCase("2,2", 4)]
         [TestCase("5,5", 10)]
+        [TestCase("1,2,3,4,5,6,7,8,9", 45)]
         public void AddNumbersSeparatedWithComma(string input, int result)
         {
             Assert.AreEqual(result, new Calculator().Add(input));
