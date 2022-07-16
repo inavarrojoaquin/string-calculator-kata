@@ -20,12 +20,13 @@ namespace StringCalculator
             if (string.IsNullOrEmpty(input))
                 return result;
 
-            List<char> separators = new List<char> { ',', '\n' };
+            List<string> separators = new List<string> { ",", "\n" };
 
             if (input.StartsWith("//"))
                 input = SpliSeparatorsAndNumbers(input, separators);
-            
-            foreach (string stringNumber in input.Split(separators.ToArray())) 
+
+            foreach (string stringNumber in input.Split(separators.ToArray(),
+                                                        StringSplitOptions.RemoveEmptyEntries)) 
             {
                 int number = int.Parse(stringNumber);
                 
@@ -44,16 +45,31 @@ namespace StringCalculator
             return result;
         }
 
-        private string SpliSeparatorsAndNumbers(string input, List<char> separators)
+        private string SpliSeparatorsAndNumbers(string input, List<string> separators)
         {
             separators.Clear();
             input = input.Remove(0, 2);
+            string arbitrary = null;
             foreach (char value in input)
             {
                 int temp;
                 if (!int.TryParse(value.ToString(), out temp))
                 {
-                    separators.Add(value);
+                    string stringValue = value.ToString();
+                    if (stringValue == "[")
+                        arbitrary = string.Empty;
+                    
+                    if (stringValue == "]")
+                    {
+                        stringValue = arbitrary.Replace("[", "");
+                        arbitrary = null;
+                    }
+
+                    if (arbitrary != null)
+                        arbitrary += value;
+                    else
+                        separators.Add(stringValue);
+
                     input = input.Remove(0, 1);
                     continue;
                 }
