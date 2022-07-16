@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using System;
 
 namespace StringCalculator
 {
@@ -44,5 +45,12 @@ namespace StringCalculator
             Assert.AreEqual(result, new Calculator().Add(input));
         }
 
+        [TestCase("1,-2,-3")]
+        public void RaiseExWhenExistAnyNegative(string input)
+        {
+            var ex = Assert.Throws<Exception>(() => new Calculator().Add(input));
+
+            Assert.AreEqual("error: negatives not allowed: -2 -3", ex.Message);
+        }
     }
 }

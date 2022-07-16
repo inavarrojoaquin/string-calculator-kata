@@ -7,10 +7,12 @@ namespace StringCalculator
     public class Calculator
     {
         private int result;
+        private List<int> negatives;
 
         public Calculator()
         {
             result = 0;
+            negatives = new List<int>();
         }
 
         public int Add(string input)
@@ -23,8 +25,18 @@ namespace StringCalculator
             if (input.StartsWith("//"))
                 input = SpliSeparatorsAndNumbers(input, separators);
             
-            foreach (string number in input.Split(separators.ToArray()))
-                result += int.Parse(number);
+            foreach (string stringNumber in input.Split(separators.ToArray())) 
+            {
+                int number = int.Parse(stringNumber);
+                
+                if ( number < 0)
+                    negatives.Add(number);
+                
+                result += number;
+            }
+
+            if (negatives.Any())
+                throw new Exception("error: negatives not allowed: " + string.Join(' ', negatives));
 
             return result;
         }
