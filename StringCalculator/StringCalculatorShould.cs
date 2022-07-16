@@ -52,5 +52,11 @@ namespace StringCalculator
 
             Assert.AreEqual("error: negatives not allowed: -2 -3", ex.Message);
         }
+
+        [TestCase("1001,2", 2)]
+        public void IgnoreNumbersBiggerThan100(string input, int result)
+        {
+            Assert.AreEqual(result, new Calculator().Add(input));
+        }
     }
 }

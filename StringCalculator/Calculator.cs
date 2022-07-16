@@ -29,8 +29,11 @@ namespace StringCalculator
             {
                 int number = int.Parse(stringNumber);
                 
-                if ( number < 0)
+                if (number < 0)
                     negatives.Add(number);
+
+                if (number > 100)
+                    continue;
                 
                 result += number;
             }
