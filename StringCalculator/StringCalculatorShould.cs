@@ -70,5 +70,11 @@ namespace StringCalculator
         {
             Assert.AreEqual(result, new Calculator().Add(input));
         }
+
+        [TestCase("//[foo][bar]\n1foo2bar3", 6)]
+        public void AddNumbersWithMultipleLongerLenghtSeparator(string input, int result)
+        {
+            Assert.AreEqual(result, new Calculator().Add(input));
+        }
     }
 }
