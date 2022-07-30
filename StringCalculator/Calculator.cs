@@ -8,19 +8,19 @@ namespace StringCalculator
     {
         private int result;
         private List<int> negatives;
+        private List<string> separators;
 
         public Calculator()
         {
             result = 0;
             negatives = new List<int>();
+            separators = new List<string> { ",", "\n" };
         }
 
         public int Add(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return result;
-
-            List<string> separators = new List<string> { ",", "\n" };
 
             if (input.StartsWith("//"))
                 input = SpliSeparatorsAndNumbers(input, separators);
