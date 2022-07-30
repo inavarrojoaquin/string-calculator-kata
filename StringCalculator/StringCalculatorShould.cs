@@ -64,5 +64,11 @@ namespace StringCalculator
         {
             Assert.AreEqual(result, new Calculator().Add(input));
         }
+
+        [TestCase("//[*][%]\n1*2%3", 6)]
+        public void AddNumbersWithMultipleSingleLenghtSeparator(string input, int result)
+        {
+            Assert.AreEqual(result, new Calculator().Add(input));
+        }
     }
 }
